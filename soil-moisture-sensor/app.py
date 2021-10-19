@@ -29,10 +29,8 @@ def handle_method_request(request):
     elif request.name == "relay_off":
         relay.off()
 
-        if request.name == "relay_on":
-            relay.on()
-        elif request.name == "relay_off":
-            relay.off()
+    method_response = MethodResponse.create_from_method_request(request, 200)
+    device_client.send_method_response(method_response)
 
 
 def main_loop(device_client):
