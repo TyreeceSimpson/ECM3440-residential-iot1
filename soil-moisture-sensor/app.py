@@ -1,12 +1,12 @@
+import time
+import json
+import sys
 from azure.iot import device
 from counterfit_connection import CounterFitConnection
-
-import time
 from counterfit_shims_grove.adc import ADC
 from counterfit_shims_grove.grove_relay import GroveRelay
 from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 
-import sys
 
 adc = ADC()
 relay = GroveRelay(5)
@@ -20,7 +20,7 @@ def main():
     device_client.on_method_request_received = handle_method_request
     if "pytest" not in sys.modules:
         main_loop(device_client)
-    
+
 
 def handle_method_request(request):
     print("Direct method received - ", request.name)
