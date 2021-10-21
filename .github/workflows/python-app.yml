@@ -36,4 +36,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Analysing the code with pylint
       run: |
-        pylint soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py
+        pylint soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py --exit-zero
