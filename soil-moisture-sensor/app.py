@@ -7,7 +7,6 @@ from counterfit_shims_grove.adc import ADC
 from counterfit_shims_grove.grove_relay import GroveRelay
 from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 
-
 adc = ADC()
 relay = GroveRelay(5)
 connection_string = 'HostName=tyreeceiothub.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=vI8+ER648WQfM6D0jY813cZ9l2IxjBzDtbsq4opW7wk='
@@ -21,7 +20,6 @@ def main():
     if "pytest" not in sys.modules:
         main_loop(device_client)
 
-
 def handle_method_request(request):
     print("Direct method received - ", request.name)
     if request.name == "relay_on":
@@ -31,7 +29,6 @@ def handle_method_request(request):
 
     method_response = MethodResponse.create_from_method_request(request, 200)
     device_client.send_method_response(method_response)
-
 
 def main_loop(device_client):
     while device_client.connected:
@@ -43,7 +40,6 @@ def main_loop(device_client):
         device_client.send_message(message)
 
         time.sleep(10)
-
 
 if "pytest" not in sys.modules:
     main()

@@ -1,6 +1,4 @@
-# import os
 from mockito import when, mock, verify, unstub
-
 
 import app
 
@@ -30,5 +28,3 @@ def test_handle_request():
     app.handle_method_request(mock({'name': 'relay_off'}))
     verify(app.relay).off()
 
-# def test_main_loop():
-#     app.main_loop()
