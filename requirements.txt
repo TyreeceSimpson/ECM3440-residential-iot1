@@ -5,3 +5,5 @@ counterfit-shims-grove
 pytest
 mockito
 pylint
+flake8
+coverage
