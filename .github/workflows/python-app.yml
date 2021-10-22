@@ -29,4 +29,4 @@ jobs:
         pytest
     - name: Analysing the code with radon cyclomatic complexity
       run: |
-        radon cc app.py test_app.py -a
+        radon cc soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -a
