@@ -35,4 +35,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Report test coverage
       run: |
-        coverage report soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -m
+        coverage report soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -m -i
