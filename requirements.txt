@@ -3,6 +3,5 @@ CounterFit
 counterfit-connection
 counterfit-shims-grove
 pytest
-flake8
 mockito
 radon
