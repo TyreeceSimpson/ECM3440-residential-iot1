@@ -4,4 +4,4 @@ counterfit-connection
 counterfit-shims-grove
 pytest
 mockito
-pylint
+radon
