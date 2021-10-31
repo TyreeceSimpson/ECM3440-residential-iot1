@@ -32,7 +32,7 @@ jobs:
         radon cc soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -a
     - name: pytest coverage
       run: |
-        pytest --cov-report term-missing:skip-covered --cov=app
+        pytest --cov-report term-missing:skip-covered --cov=app test_app
     - name: Report test coverage
       run: |
         coverage report -m --fail-under=75 app
