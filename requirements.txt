@@ -4,5 +4,6 @@ counterfit-connection
 counterfit-shims-grove
 pytest
 mockito
+radon
 pylint
 coverage

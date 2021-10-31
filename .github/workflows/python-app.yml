@@ -27,6 +27,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Check linting with pylint
+      run: |
+        pylint soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py --exit-zero
+    - name: Analysing the code with radon cyclomatic complexity
+      run: |
+        radon cc soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -a
     - name: Report test coverage
       run: |
         coverage report -m --fail-under=75 soil-moisture-sensor
