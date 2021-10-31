@@ -2,9 +2,8 @@ azure-iot-device
 CounterFit
 counterfit-connection
 counterfit-shims-grove
-pytest
 mockito
-radon
-pylint
-coverage
+pytest
 pytest-cov
+pylint
+radon

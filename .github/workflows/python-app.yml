@@ -21,9 +21,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Test with pytest
+    - name: Test with pytest and report coverage
       run: |
-        pytest
+        pytest --cov-report term-missing:skip-covered --cov=app --cov-fail-under=75
     - name: Check linting with pylint
       run: |
         pylint soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py --exit-zero
@@ -32,7 +32,4 @@ jobs:
         radon cc soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -a
     - name: pytest coverage
       run: |
-        pytest --cov-report term-missing:skip-covered --cov=app, test_app
-    - name: Report test coverage
-      run: |
-        coverage report -m --fail-under=75 app
+        pytest --cov-report term-missing:skip-covered --cov=app
