@@ -5,3 +5,4 @@ counterfit-shims-grove
 pytest
 mockito
 radon
+pylint
