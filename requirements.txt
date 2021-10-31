@@ -7,3 +7,4 @@ mockito
 radon
 pylint
 coverage
+pytest-cov
