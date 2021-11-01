@@ -1,0 +1,24 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Login via Az module
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        enable-AzPSSession: true 
+    - name: Run Azure PowerShell script
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: deploy.ps1
+        azPSVersion: latest
