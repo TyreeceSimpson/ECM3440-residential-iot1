@@ -17,6 +17,7 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         enable-AzPSSession: true 
+        inlineScript: az account set --subscription be3a8af9-08bd-46b0-a8b5-803a2799799d
     - name: Remove existing resource group
       uses: Azure/powershell@v1
       with:
