@@ -1,13 +1,13 @@
-name: Python application
+name: Continuous Integration
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
+  workflow_dispatch:
+
 jobs:
-  build:
+  Integrate:
 
     runs-on: ubuntu-latest
 

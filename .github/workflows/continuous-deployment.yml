@@ -1,0 +1,44 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        enable-AzPSSession: true 
+    - name: Remove existing resource group
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: Get-AzResourceGroup --name soil-moisture-sensor | Remove-AzResourceGroup --force
+        azPSVersion: latest
+    - name: Create resource group
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: az group create --name soil-moisture-sensor --location "UK South"
+        azPSVersion: latest
+    - name: Create IoT hub
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: az iot hub create --resource-group soil-moisture-sensor --sku F1 --partition-count 2 --name iotHub
+        azPSVersion: latest
+    - name: Register IoT devices
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: az iot hub device-identity create --device-id soil-moisture-sensor-one --hub-name iotHub
+                      az iot hub device-identity create --device-id soil-moisture-actuator-one --hub-name iotHub
+                      az iot hub device-identity create --device-id soil-moisture-sensor-two --hub-name iotHub
+                      az iot hub device-identity create --device-id soil-moisture-actuator-two --hub-name iotHub
+                      az iot hub device-identity create --device-id soil-moisture-sensor-three --hub-name iotHub
+                      az iot hub device-identity create --device-id soil-moisture-actuator-three --hub-name iotHub
+        azPSVersion: latest
