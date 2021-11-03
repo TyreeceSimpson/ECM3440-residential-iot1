@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 
-  workflow_dispatch:
+  workflow_dispatch: [ main ]
 
 jobs:
   Deploy:
@@ -16,8 +16,12 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-        enable-AzPSSession: true 
+        enable-AzPSSession: true   
+    - name: Set subscription
+      uses: Azure/powershell@v1
+      with:
         inlineScript: az account set --subscription be3a8af9-08bd-46b0-a8b5-803a2799799d
+        azPSVersion: latest
     - name: Remove existing resource group
       uses: Azure/powershell@v1
       with:
