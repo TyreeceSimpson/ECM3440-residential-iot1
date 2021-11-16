@@ -64,7 +64,7 @@ jobs:
     steps:
     - name: Create APP.zip using zip-files
       run: |
-        zip-files --auto-root --outfile APP.zip soil-moisture-sensor/app.py
+        zip-folder --auto-root --outfile APP.zip virtualdevices
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:

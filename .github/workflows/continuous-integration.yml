@@ -23,10 +23,10 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest and report coverage
       run: |
-        pytest --cov-report term-missing:skip-covered --cov=ECM3440-residential-iot1 tests/ --cov-fail-under=75
+        pytest --cov-report term-missing --cov=virtualdevices/ --cov-fail-under=75
     - name: Check linting with pylint
       run: |
-        pylint actuator-one actuator-two sensor-one actuator-two --exit-zero
+        pylint virtualdevices --exit-zero
     - name: Analyse code with radon cyclomatic complexity
       run: |
-        radon cc actuator-one actuator-two sensor-one actuator-two -a
+        radon cc virtualdevices -a
