@@ -35,16 +35,16 @@ jobs:
     - name: Create IoT hub
       uses: Azure/powershell@v1
       with:
-        inlineScript: az iot hub create --resource-group iotservice-development --sku F1 --partition-count 2 --name iotHub
+        inlineScript: az iot hub create --resource-group iotservice-development --sku F1 --partition-count 2 --name iothub-devices
         azPSVersion: latest
     - name: Register IoT devices
       uses: Azure/powershell@v1
       with:
-        inlineScript: az iot hub device-identity create --device-id sensor-one --hub-name iotHub
-                      az iot hub device-identity create --device-id sensor-two --hub-name iotHub
+        inlineScript: az iot hub device-identity create --device-id sensor-one --hub-name iothub-devices
+                      az iot hub device-identity create --device-id sensor-two --hub-name iothub-devices
 
-                      az iot hub device-identity create --device-id actuator-one --hub-name iotHub
-                      az iot hub device-identity create --device-id actuator-two --hub-name iotHub
+                      az iot hub device-identity create --device-id actuator-one --hub-name iothub-devices
+                      az iot hub device-identity create --device-id actuator-two --hub-name iothub-devices
         azPSVersion: latest
     - name: Create storage account
       uses: Azure/powershell@v1
@@ -71,5 +71,5 @@ jobs:
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:
-        inlineScript: az storage blob upload --account-name iotstorage --container-name <container> --name app --file APP.zip --auth-mode login
+        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name app --file APP.zip --auth-mode login
         azPSVersion: latest

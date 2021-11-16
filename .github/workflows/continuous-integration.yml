@@ -26,7 +26,7 @@ jobs:
         pytest --cov-report term-missing:skip-covered --cov=app --cov-fail-under=75
     - name: Check linting with pylint
       run: |
-        pylint soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py --exit-zero
+        pylint actuator-one actuator-two sensor-one actuator-two --exit-zero
     - name: Analyse code with radon cyclomatic complexity
       run: |
-        radon cc soil-moisture-sensor/app.py soil-moisture-sensor/test_app.py -a
+        radon cc actuator-one actuator-two sensor-one actuator-two -a
