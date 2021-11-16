@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest and report coverage
       run: |
-        pytest --cov-report term-missing:skip-covered --cov=ECM3440-residential-iot1 --cov-fail-under=75
+        pytest --cov-report term-missing:skip-covered --cov=ECM3440-residential-iot1/ --cov-fail-under=75
     - name: Check linting with pylint
       run: |
         pylint actuator-one actuator-two sensor-one actuator-two --exit-zero
