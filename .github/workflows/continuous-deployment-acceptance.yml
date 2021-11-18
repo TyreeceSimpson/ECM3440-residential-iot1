@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  Provision:
+
+  Deploy:
 
     runs-on: ubuntu-latest
 
@@ -17,54 +18,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         enable-AzPSSession: true   
-    - name: Set subscription
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az account set --subscription be3a8af9-08bd-46b0-a8b5-803a2799799d
-        azPSVersion: latest
-    - name: Remove existing resource group
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: Get-AzResourceGroup -Name iotservice-acceptance | Remove-AzResourceGroup -Force
-        azPSVersion: latest
-    - name: Create resource group
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az group create --name iotservice-acceptance --location uksouth
-        azPSVersion: latest
-    - name: Create IoT hub
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az iot hub create --resource-group iotservice-acceptance --sku F1 --partition-count 2 --name iothub-devices
-        azPSVersion: latest
-    - name: Register IoT devices
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az iot hub device-identity create --device-id sensor-one --hub-name iothub-devices
-                      az iot hub device-identity create --device-id sensor-two --hub-name iothub-devices
-
-                      az iot hub device-identity create --device-id actuator-one --hub-name iothub-devices
-                      az iot hub device-identity create --device-id actuator-two --hub-name iothub-devices
-        azPSVersion: latest
-    - name: Create storage account
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az storage account create --name iotstorage --resource-group storage-resource-group --location uksouth --sku Standard_RAGRS --kind StorageV2
-        azPSVersion: latest
-    - name: Create container
-      uses: Azure/powershell@v1
-      with:
-        inlineScript: az ad signed-in-user show --query objectId -o tsv | az role assignment create --role "Storage Blob Data Contributor" --assignee @- \
-          --scope "/subscriptions/be3a8af9-08bd-46b0-a8b5-803a2799799d/resourceGroups/iotservice-acceptance/providers/Microsoft.Storage/storageAccounts/iotstorage"
-
-          az storage container create --account-name iotstorage --name virtualdevices --auth-mode login
-        azPSVersion: latest
-
-  upload:
-
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Create APP.zip using zip-files
       run: |
         zip-folder --auto-root --outfile APP.zip virtualdevices
