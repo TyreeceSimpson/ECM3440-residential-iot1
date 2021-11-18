@@ -1,0 +1,24 @@
+name: Continuous Deployment Production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        enable-AzPSSession: true  
+    - name: Create APP.zip using zip-files
+      run: |
+        zip-folder --auto-root --outfile APP.zip virtualdevices
+    - name: Upload zip to conatiner
+      uses: Azure/powershell@v1
+      with:
+        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name app --file APP.zip --auth-mode login
+        azPSVersion: latest

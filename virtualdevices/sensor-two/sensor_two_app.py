@@ -9,7 +9,7 @@ from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 
 adc = ADC()
 relay = GroveRelay(5)
-connection_string = 'HostName=tyreeceiothub.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=vI8+ER648WQfM6D0jY813cZ9l2IxjBzDtbsq4opW7wk='
+connection_string = 'HostName=iothub-devices.azure-devices.net;DeviceId=sensor-two;SharedAccessKey=BUccsKmIiv6KVZb0bZzktg72wHl39eqxDPc2FwGzqok='
 device_client = IoTHubDeviceClient.create_from_connection_string(connection_string)
 def main():
     CounterFitConnection.init('127.0.0.1', 5000)
