@@ -1,5 +1,5 @@
-from mockito import when, mock, verify, unstub
-import app
+from mockito import when, mock, verify
+import actuator_one_app
 
 class MockClient:
     on_method_request_received = {}
@@ -11,16 +11,16 @@ class MockClient:
         return True
     
 def test_connect():
-    when(app.CounterFitConnection).init('127.0.0.1', 5000).thenReturn(mock(True))
-    when(app.IoTHubDeviceClient).create_from_connection_string('HostName=iothub-devices.azure-devices.net;DeviceId=actuator-one;SharedAccessKey=Z1ehmmzMSNeQa0qiDyC13msI3Yg/2YnVaIFLY1oN9cU=').thenReturn(MockClient)
-    when(app.device_client).connect().thenReturn(mock(True))
-    app.main()
-    verify(app.device_client).connect()
+    when(actuator_one_app.CounterFitConnection).init('127.0.0.1', 5000).thenReturn(mock(True))
+    when(actuator_one_app.IoTHubDeviceClient).create_from_connection_string('HostName=iothub-devices.azure-devices.net;DeviceId=actuator-one;SharedAccessKey=Z1ehmmzMSNeQa0qiDyC13msI3Yg/2YnVaIFLY1oN9cU=').thenReturn(MockClient)
+    when(actuator_one_app.device_client).connect().thenReturn(mock(True))
+    actuator_one_app.main()
+    verify(actuator_one_app.device_client).connect()
 
 def test_handle_request():
-    when(app.relay).on().thenReturn(mock(True));
-    when(app.relay).off().thenReturn(mock(True));
-    app.handle_method_request(mock({'name': 'relay_on'}))
-    verify(app.relay).on()
-    app.handle_method_request(mock({'name': 'relay_off'}))
-    verify(app.relay).off()
+    when(actuator_one_app.relay).on().thenReturn(mock(True));
+    when(actuator_one_app.relay).off().thenReturn(mock(True));
+    actuator_one_app.handle_method_request(mock({'name': 'relay_on'}))
+    verify(actuator_one_app.relay).on()
+    actuator_one_app.handle_method_request(mock({'name': 'relay_off'}))
+    verify(actuator_one_app.relay).off()

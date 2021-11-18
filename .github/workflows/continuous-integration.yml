@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest and report coverage
       run: |
-        pytest --cov-report term-missing --cov=virtualdevices/ --cov-fail-under=75
+        pytest --cov-report term-missing --cov=actuator_one_app --cov=actuator_two_app --cov=sensor_one_app --cov=sensor_two_app --cov-fail-under=75
     - name: Check linting with pylint
       run: |
         pylint virtualdevices --exit-zero
