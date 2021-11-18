@@ -1,5 +1,5 @@
 from mockito import when, mock, verify
-import actuator_two_app
+from ..devices import actuator_two_app
 
 class MockClient:
     on_method_request_received = {}

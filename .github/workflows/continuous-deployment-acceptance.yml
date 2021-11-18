@@ -22,11 +22,11 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         enable-AzPSSession: true   
-    - name: Create APP.zip using zip-files
+    - name: Create devices.zip using zip-files
       run: |
-        zip-folder --auto-root --outfile APP.zip virtualdevices
+        zip-folder --auto-root --outfile devices.zip virtualdevices/devices
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:
-        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name app --file APP.zip --auth-mode login
+        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name devices --file devices.zip --auth-mode login
         azPSVersion: latest

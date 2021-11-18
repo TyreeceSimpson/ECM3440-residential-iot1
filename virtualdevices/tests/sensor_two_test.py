@@ -1,5 +1,5 @@
 from mockito import when, mock, verify
-import sensor_two_app
+from ..devices import sensor_two_app
 
 class MockClient:
     on_method_request_received = {}
