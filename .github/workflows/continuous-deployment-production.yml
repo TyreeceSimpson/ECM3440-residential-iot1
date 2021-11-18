@@ -20,7 +20,7 @@ jobs:
         enable-AzPSSession: true  
     - name: Create APP.zip using zip-files
       run: |
-        zip-folder --auto-root --outfile APP.zip virtualdevices
+        zip-folder --auto-root --outfile APP.zip ECM3440-residential-iot1/virtualdevices
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:
