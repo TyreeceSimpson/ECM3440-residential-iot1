@@ -17,14 +17,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install zip-files
+    - name: Create devices.zip using zip-files
+      run: |
+        zip-folder --auto-root --outfile devices.zip devices
     - name: Login to Azure
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         enable-AzPSSession: true   
-    - name: Create devices.zip using zip-files
-      run: |
-        zip-folder --auto-root --outfile devices.zip virtualdevices/devices
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:
