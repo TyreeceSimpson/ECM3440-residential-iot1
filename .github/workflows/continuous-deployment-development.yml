@@ -29,5 +29,5 @@ jobs:
     - name: Upload zip to conatiner
       uses: Azure/powershell@v1
       with:
-        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name devices --file devices.zip --auth-mode login
+        inlineScript: az storage blob upload --account-name iotstorage --container-name virtualdevices --name devices --file virtualdevices.zip --auth-mode login
         azPSVersion: latest
